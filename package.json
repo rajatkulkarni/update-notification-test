@@ -8,14 +8,23 @@
     "@testing-library/user-event": "^12.1.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hot-toast": "^1.0.2",
+    "react-icons": "^4.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "preversion": "echo \"prev version -> $npm_package_version \"",
+    "postversion": "printf '{\"version\": \"%s\"}\n' $npm_package_version > public/buildVersion.json",
+    "bump-version": "yarn version --new-version minor",
+    "replace-version": "echo \"preversion -> $REACT_APP_PREV_VERSION postversion -> $REACT_APP_VERSION\" && sed 's/$REACT_APP_PREV_VERSION/$REACT_APP_VERSION/' public/buildVersion.json > tempVersion.json",
+    "temp-version": "mv tempVersion.json public/buildVersion.json",
+    "build-version": "yarn bump_version && yarn temp-version",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postmerge": "git-branch-is master && yarn bump-version"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +43,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "git-branch-is": "^4.0.0",
+    "husky": "^6.0.0"
   }
 }

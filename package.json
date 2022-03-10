@@ -22,7 +22,7 @@
     "build-version": "yarn bump_version && yarn temp-version",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "playwright test",
     "eject": "react-scripts eject",
     "postmerge": "git-branch-is master && yarn bump-version"
   },
@@ -45,7 +45,12 @@
     ]
   },
   "devDependencies": {
+    "@playwright/test": "^1.19.2",
     "git-branch-is": "^4.0.0",
     "husky": "^6.0.0"
-  }
+  },
+  "main": "index.js",
+  "repository": "git@github.com:rajatkulkarni/update-notification-test.git",
+  "author": "rajat <rajat@avoma.com>",
+  "license": "MIT"
 }

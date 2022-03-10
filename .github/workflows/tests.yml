@@ -14,10 +14,14 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - uses: microsoft/playwright-github-action@v1
 
       # Runs a single command using the runners shell
       - name: Run Test
         run: echo Hello, world!
 
-      - name: Install Playwright
-        run: sudo -i npx playwright install --with-deps
+      - name: Install deps
+        run: yarn
+
+      - name: Run Tests
+        run: yarn test

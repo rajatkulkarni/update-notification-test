@@ -22,7 +22,7 @@
     "build-version": "yarn bump_version && yarn temp-version",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "playwright test",
     "eject": "react-scripts eject",
     "postmerge": "git-branch-is master && yarn bump-version"
   },

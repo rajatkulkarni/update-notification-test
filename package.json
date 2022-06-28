@@ -14,17 +14,14 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "preversion": "echo \"prev version -> $npm_package_version \"",
-    "postversion": "printf '{\"version\": \"%s\"}\n' $npm_package_version > public/buildVersion.json",
-    "bump-version": "yarn version --new-version minor",
-    "replace-version": "echo \"preversion -> $REACT_APP_PREV_VERSION postversion -> $REACT_APP_VERSION\" && sed 's/$REACT_APP_PREV_VERSION/$REACT_APP_VERSION/' public/buildVersion.json > tempVersion.json",
-    "temp-version": "mv tempVersion.json public/buildVersion.json",
-    "build-version": "yarn bump_version && yarn temp-version",
+    "bump-version-minor": "yarn version --new-version minor",
+    "postversion": "printf '{\"version\": \"%s\"}\n' $npm_package_version > public/build-version.json",
+    "push-version-bump": "git add . && git commit -m 'Bumped minor version' && git push",
+    "postmerge": "yarn bump-version-minor && yarn push-version-bump",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "playwright test",
     "eject": "react-scripts eject",
-    "postmerge": "git-branch-is master && yarn bump-version"
   },
   "eslintConfig": {
     "extends": [

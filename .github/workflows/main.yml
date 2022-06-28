@@ -49,3 +49,9 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+      - name: Set Dummy git users for Commit bumps
+            run: |
+              git config user.name "Github Action Runner"
+              git config user.email "<>"
+          - name: Bump package version and commit
+            run: yarn postmerge
